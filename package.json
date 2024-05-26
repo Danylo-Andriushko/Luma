@@ -1,0 +1,21 @@
+{
+    "name": "cypress",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "npx cypress run --spec '../magento-project/cypress/e2e/*.cy.js'"
+    },
+    "author": "Danylo Andriushko",
+    "license": "ISC",
+    "devDependencies": {
+        "cypress": "^13.8.0",
+        "cypress-xpath": "^2.0.1",
+        "dotenv": "^16.4.5",
+        "mochawesome": "^7.1.3",
+        "mochawesome-report-generator": "^6.2.0"
+    },
+    "dependencies": {
+        "@faker-js/faker": "^8.4.1"
+    }
+}
