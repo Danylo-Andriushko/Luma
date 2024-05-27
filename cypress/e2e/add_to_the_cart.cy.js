@@ -5,8 +5,8 @@ const mainPage = Pages.main_page;
 const productsPage = Pages.products_page;
 const productPage = Pages.product_page;
 
-describe('add products to the chart', () => {
-  beforeEach('login to te application', () => {
+describe('add products to the chart as a guest user', () => {
+  beforeEach('open main page', () => {
     mainPage.open();
   })
 

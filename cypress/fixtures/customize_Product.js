@@ -26,6 +26,6 @@ customizeProduct(size, color, quantity) {
         this.sizeMenu(size).click(),
         this.productColor(color).click({ force: true }),
         this.productQuantity().clear().type(quantity),
-        this.addButton().click({ force: true })
+        this.addButton().click({ multiple: true })
 }
 }

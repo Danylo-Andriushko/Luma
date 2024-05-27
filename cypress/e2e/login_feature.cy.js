@@ -6,20 +6,19 @@ const header = Pages.header;
 const loginPage = Pages.login_page;
 
 
-describe('login feature', () => {
-  beforeEach('open main page', () => {
+describe('Login feature', () => {
+  beforeEach('Open main page', () => {
     mainPage.open();
   })
 
   it('Check Sign In button available from all pages', () => {
-    header.signInButtonIsAvailableFromAllContentPages();
+    header.availableFromAllContentPages('signInButton');
   })
 
   it('Verify that login required fields have descriptions and marked with "*"', () => {
     header.signInButton().click({multiple:true})
     loginPage.checkLoginAttributesFields();
     loginPage.checkLoginRequiredAttributesFields();
-    
   })
 
   it('Login with valid credentials', () => {

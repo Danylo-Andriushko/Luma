@@ -1,7 +1,9 @@
 import { BasePage } from "./base_page";
 import { faker } from "@faker-js/faker";
-const { registrationsAttributesValues } = require("../../fixtures/customer_account_data");
 import { checkAttributesFields, checkRequiredAttributesFields } from '../../fixtures/checkAttributes';
+import { Message } from "../elements/messages";
+const { registrationsAttributesValues } = require("../../fixtures/customer_account_data");
+const registrationMessage = new Message();
 
 
 export class CreateNewAccountPage extends BasePage{
@@ -40,4 +42,7 @@ export class CreateNewAccountPage extends BasePage{
         this.createAnAccountButton().click({multiple: true})
     }
 
+    registrationMessageIsSuccessful(){
+        return registrationMessage.message().should('eq', 'Thank you for registering with Main Website Store.')
+    }
 }

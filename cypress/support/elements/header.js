@@ -11,7 +11,7 @@ export class Header{
         .contains("Create an Account") 
     };
 
-    signInButtonIsAvailableFromAllContentPages() {
+    availableFromAllContentPages(item) {
         const menuButtons = [
             menuItems.whatsNew,
             menuItems.womenButton,
@@ -23,7 +23,9 @@ export class Header{
 
         menuButtons.forEach(button => {
             button().click({multiple: true});
-            this.signInButton().should('be.visible');
+            item === 'signInButton'
+            ? this.signInButton().should('be.visible')
+            : this.createAnAccountLink().should('be.visible')
         });
     }
 
