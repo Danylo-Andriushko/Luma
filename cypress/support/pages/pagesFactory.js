@@ -1,5 +1,5 @@
-import { Header } from "../elements/header";
 import { AccountPage } from "./account_page";
+import { CartPage } from "./cartPage";
 import { CreateNewAccountPage } from "./create_account_page";
 import { HomePage } from "./home_page";
 import { LoginPage } from "./login_page";
@@ -15,8 +15,8 @@ class Pages{
         this.product_page = new ProductPage();
         this.account_page = new AccountPage();
         this.login_page = new LoginPage();
-        this.header = new Header();
         this.create_account_page = new CreateNewAccountPage(); 
+        this.cart_page = new CartPage();
     }
 
 }

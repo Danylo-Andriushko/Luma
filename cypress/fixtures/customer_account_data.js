@@ -1,4 +1,4 @@
-const registrationsAttributesValues = {
+export const registrationsAttributesValues = {
     firstName: 'firstname',
     lastName: 'lastname',
     email: 'email_address',
@@ -6,12 +6,7 @@ const registrationsAttributesValues = {
     confirmPassword: 'password-confirmation'
 }
 
-const loginAttributesValues = {
+export const loginAttributesValues = {
     email: 'email',
     password: 'pass'
-}
-
-module.exports = {
-    registrationsAttributesValues,
-    loginAttributesValues
 }

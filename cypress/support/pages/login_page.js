@@ -1,5 +1,5 @@
 import { BasePage } from "./base_page";
-const { loginAttributesValues } = require("../../fixtures/customer_account_data");
+import { loginAttributesValues } from "../../fixtures/customer_account_data";
 import { checkAttributesFields, checkRequiredAttributesFields } from '../../fixtures/checkAttributes';
 
 export class LoginPage extends BasePage{

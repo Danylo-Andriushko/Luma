@@ -1,8 +1,9 @@
+import { Header } from '../support/elements/header.js';
 import Pages from '../support/pages/pagesFactory.js';
 
 const mainPage = Pages.main_page;
 const homePage = Pages.home_page;
-const header = Pages.header;
+const header = new Header();
 const loginPage = Pages.login_page;
 
 

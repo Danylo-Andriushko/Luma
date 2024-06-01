@@ -2,7 +2,7 @@ import { BasePage } from "./base_page";
 import { faker } from "@faker-js/faker";
 import { checkAttributesFields, checkRequiredAttributesFields } from '../../fixtures/checkAttributes';
 import { Message } from "../elements/messages";
-const { registrationsAttributesValues } = require("../../fixtures/customer_account_data");
+import { registrationsAttributesValues } from "../../fixtures/customer_account_data";
 const registrationMessage = new Message();
 
 

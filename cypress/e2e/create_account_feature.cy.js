@@ -1,7 +1,7 @@
+import { Header } from '../support/elements/header.js';
 import Pages from '../support/pages/pagesFactory.js';
-
+const header = new Header();
 const mainPage = Pages.main_page;
-const header = Pages.header;
 const create_account_page = Pages.create_account_page;
 const account = Pages.account_page;
 

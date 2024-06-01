@@ -15,7 +15,7 @@ describe('add products to the chart as a guest user', () => {
     productsPage.selectProduct(1);
     productPage.customizeProductOnTheCurrentPage("S", "Blue", 1);
     productPage.productIsAdded();
-    productCart.cartNumberIs(1);
+    productCart.cartIconNumberIs(1);
   })
 
   afterEach('clear cookies value', () => {
