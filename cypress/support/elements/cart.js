@@ -12,7 +12,9 @@ export class Cart extends BasePage{
     deleteProductButton(){ return cy.get(`.action.delete`)};
     confirmDeletionButton(){ return cy.get(`.action-primary.action-accept`)};
     productPrice(){ return cy.get(`.subtotal span.price`)};
-    getMiniCartEmptyPopup(){ return cy.get(`.subtitle.empty`)};
+    miniCartPopup(){ return cy.get(`.subtitle.empty`)};
+    viewCartPageLink(){ return cy.get('.action.viewcart')};
+
 
     cartIconNumberIs(number){
         return this.miniCartIconCounter().invoke('text').then(function(cartNumber){
@@ -21,8 +23,9 @@ export class Cart extends BasePage{
     }
 
     clickCartIcon(){
-        this.wait(2)
-        return this.miniCart().click({force: true})
+        this.loadingSpinner().should('not.exist');
+        this.miniCart().click({force: true})
+        return this
     }
 
     cartQuantity() {
@@ -36,6 +39,6 @@ export class Cart extends BasePage{
     }
 
     miniCartEmptyPopup(){
-        return this.getMiniCartEmptyPopup().invoke('text')
+        return this.miniCartPopup().invoke('text')
     }
 }

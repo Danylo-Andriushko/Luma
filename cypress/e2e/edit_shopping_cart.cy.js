@@ -1,14 +1,12 @@
 import { Cart } from '../support/elements/cart.js';
-import { Header } from '../support/elements/header.js';
 import Pages from '../support/pages/pagesFactory.js';
-import { urls } from "../fixtures/pages_url.js";
-import { changeProductQuantityTo, productsSubtotal } from "../fixtures/shopping_cart"
+import { urls } from "../utils/pages_url.js";
+import { changeProductQuantityTo, productsSubtotal } from "../utils/shopping_cart.js"
+import { ProductUtils } from '../utils/product_helpers.js';
+const productHelpers = new ProductUtils();
 
-const header = new Header();
 const cart = new Cart();
 const mainPage = Pages.main_page;
-const productsPage = Pages.products_page;
-const productPage = Pages.product_page;
 const cartPage = Pages.cart_page;
 
 describe('Edit cart', () => {
@@ -16,10 +14,9 @@ describe('Edit cart', () => {
     mainPage.open();
   })
 
-  it('Edit product quantity in the mini cart', () => {
-    mainPage.selectProductsGroup();
-    productsPage.selectProduct(1);
-    productPage.customizeProductOnTheCurrentPage("S", "Blue", 1);
+  describe('Edit mini cart', () => {
+  it('Should recalculate subtotal in the Mini Cart', () => {
+    productHelpers.addProductToTheCart("S", "Blue", 1)
     cart.clickCartIcon();
     productsSubtotal(cart.productPrice()).then((initialPrice) => {
       changeProductQuantityTo(5, cart.miniCartQuantityInput(), 
@@ -33,19 +30,17 @@ describe('Edit cart', () => {
     });
   });
 
-  it('Delete product from mini cart', () => {
-    mainPage.selectProductsGroup();
-    productsPage.selectProduct(1);
-    productPage.customizeProductOnTheCurrentPage("S", "Blue", 1);
+  it('User is able delete product from Mini Cart', () => {
+    productHelpers.addProductToTheCart("S", "Blue", 1)
     cart.clickCartIcon();
     cart.deleteProducts();
     cart.miniCartEmptyPopup().should('eq', 'You have no items in your shopping cart.')
   });
+});
 
-  it('Edit product quantity in the Cart page', () => {
-    mainPage.selectProductsGroup();
-    productsPage.selectProduct(1);
-    productPage.customizeProductOnTheCurrentPage("S", "Blue", 1);
+describe('Edit Cart page', () => {
+  it('Should recalculate subtotal in the Cart page', () => {
+    productHelpers.addProductToTheCart("S", "Blue", 1)
     cy.visit(urls.cartPage)
     productsSubtotal(cartPage.productPrice()).then((initialPrice) => {
     changeProductQuantityTo(5, cartPage.cartQuantityInput(), cartPage.updateShoppingCartButton());
@@ -58,16 +53,15 @@ describe('Edit cart', () => {
   });
   });
 
-  it('Delete products from Cart page', () => {
-      mainPage.selectProductsGroup();
-      productsPage.selectProduct(1);
-      productPage.customizeProductOnTheCurrentPage("S", "Blue", 1);
-      cy.visit(urls.cartPage)
-      cartPage.deleteProductsFromCartPage();
-      cartPage.emptyCartTitle().should('eq', 'You have no items in your shopping cart.')
-    });
+  it('User is able delete product from Cart page', () => {
+    productHelpers.addProductToTheCart("S", "Blue", 1)
+    cy.visit(urls.cartPage)
+    cartPage.deleteProductsFromCartPage();
+    cartPage.emptyCartTitle().should('eq', 'You have no items in your shopping cart.')
+  });
 
   afterEach('clear cookies value', () => {
     cy.clearCookies();
-  })
+  });
+});
 })

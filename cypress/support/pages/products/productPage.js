@@ -1,8 +1,8 @@
-import { CustomizeProduct } from "../../../fixtures/customize_Product";
-import { Message } from "../../elements/messages";
+import { ProductUtils } from "../../../utils/product_helpers";
+import { PageMessage } from "../../elements/messages";
 import { BasePage } from "../base_page";
-const confirmationMessage = new Message();
-const customizeProductOptions = new CustomizeProduct();
+const pageMessage = new PageMessage();
+const customizeProductOptions = new ProductUtils();
 
 export class ProductPage extends BasePage{
     constructor(){
@@ -18,7 +18,7 @@ customizeProductOnTheCurrentPage(size, color, quantity) {
 }
 
 productIsAdded() { this.productTitle().then((title) => {
-        return confirmationMessage.message().should('include', `You added ${title} to your shopping cart.`);
+        return pageMessage.pageMessageText().should('include', `You added ${title} to your shopping cart.`);
     })
 }
 }

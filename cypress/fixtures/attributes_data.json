@@ -1,0 +1,30 @@
+{
+    "loginAttributesValues":{
+    "email": "email",
+    "password": "pass"
+    },
+    "registrationsAttributesValues": {
+        "firstName": "firstname",
+        "lastName": "lastname",
+        "email": "email_address",
+        "password": "password",
+        "confirmPassword": "password-confirmation"
+    },
+    "checkoutAttributesValues": {
+        "firstName": "shippingAddress.firstname",
+        "lastName": "shippingAddress.lastname",
+        "company": "shippingAddress.company",
+        "city": "shippingAddress.city",
+        "postalCode": "shippingAddress.region_id",
+        "country": "shippingAddress.country_id",
+        "phone": "shippingAddress.telephone"
+    },
+    "checkoutRequiredAttributesValue": {
+        "firstName": "shippingAddress.firstname",
+        "lastName": "shippingAddress.lastname",
+        "city": "shippingAddress.city",
+        "postalCode": "shippingAddress.region_id",
+        "country": "shippingAddress.country_id",
+        "phone": "shippingAddress.telephone"
+    }
+}

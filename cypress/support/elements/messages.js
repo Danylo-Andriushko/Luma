@@ -1,11 +1,11 @@
 import { BasePage } from "../pages/base_page";
 
-export class Message extends BasePage{
+export class PageMessage extends BasePage{
     constructor(){
         super();
     }
 
-    message(){
+    pageMessageText(){
         return cy.get(`[data-bind="html: $parent.prepareMessageForHtml(message.text)"]`).invoke('text');
     }
 }

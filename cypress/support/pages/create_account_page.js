@@ -1,9 +1,9 @@
 import { BasePage } from "./base_page";
 import { faker } from "@faker-js/faker";
-import { checkAttributesFields, checkRequiredAttributesFields } from '../../fixtures/checkAttributes';
-import { Message } from "../elements/messages";
-import { registrationsAttributesValues } from "../../fixtures/customer_account_data";
-const registrationMessage = new Message();
+import { checkAttributesFields, checkRequiredAttributesFields } from '../../utils/check_attributes';
+import { PageMessage } from "../elements/messages";
+import attributesData from "../../fixtures/attributes_data.json";
+const pageMessage = new PageMessage();
 
 
 export class CreateNewAccountPage extends BasePage{
@@ -26,11 +26,11 @@ export class CreateNewAccountPage extends BasePage{
     randomPassword = faker.internet.password();
 
     checkRegistrationAttributesFields() {
-        checkAttributesFields(registrationsAttributesValues, this.fieldsAttributes.bind(this));
+        checkAttributesFields(attributesData.registrationsAttributesValues, this.fieldsAttributes.bind(this));
     }
 
     checkRegistrationRequiredAttributesFields() {
-        checkRequiredAttributesFields(registrationsAttributesValues, this.fieldsAttributes.bind(this));
+        checkRequiredAttributesFields(attributesData.registrationsAttributesValues, this.fieldsAttributes.bind(this));
     }
 
     inputRegistrationData(){
@@ -43,6 +43,6 @@ export class CreateNewAccountPage extends BasePage{
     }
 
     registrationMessageIsSuccessful(){
-        return registrationMessage.message().should('eq', 'Thank you for registering with Main Website Store.')
+        return pageMessage.pageMessageText().should('eq', 'Thank you for registering with Main Website Store.')
     }
 }

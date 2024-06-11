@@ -1,6 +1,6 @@
 import { BasePage } from "./base_page";
-import { loginAttributesValues } from "../../fixtures/customer_account_data";
-import { checkAttributesFields, checkRequiredAttributesFields } from '../../fixtures/checkAttributes';
+import { checkAttributesFields, checkRequiredAttributesFields } from '../../utils/check_attributes';
+import attributesData from "../../fixtures/attributes_data.json";
 
 export class LoginPage extends BasePage{
     constructor(){
@@ -10,15 +10,16 @@ export class LoginPage extends BasePage{
     
     fieldsAttributes (field) { return cy.get(`.field.required > .label[for="${field}"]`) };
     emailField(){ return cy.get('input[id="email"]') };
-    passwordField(){ return cy.get('input[id="pass"]') };
-    signInButton(){ return cy.get('button.action.login.primary') }
+    passwordField(){ return cy.get('input[name="login[password]"]') };
+    signInButton(){ return cy.get('button.action.login.primary') };
+    emailErrorMessage(){ return cy.get('[id="email-error"]') }
 
     checkLoginAttributesFields() {
-        checkAttributesFields(loginAttributesValues, this.fieldsAttributes.bind(this));
+        checkAttributesFields(attributesData.loginAttributesValues, this.fieldsAttributes.bind(this));
     }
 
     checkLoginRequiredAttributesFields() {
-        checkRequiredAttributesFields(loginAttributesValues, this.fieldsAttributes.bind(this));
+        checkRequiredAttributesFields(attributesData.loginAttributesValues, this.fieldsAttributes.bind(this));
     }
 
     signIn(email, password){
@@ -26,5 +27,9 @@ export class LoginPage extends BasePage{
         this.passwordField().type(password)
         this.signInButton().click({multiple:true})
         return this
+    }
+
+    emailErrorMessageText(){
+        return this.emailErrorMessage().invoke('text')
     }
 }

@@ -1,7 +1,7 @@
 export const changeProductQuantityTo = (quantity, input, updateButton) => {
-    input.clear().type(quantity);
+    input.clear({force: true}).type(quantity);
     updateButton.click({force: true});
-    cy.wait(2000);
+    cy.wait(3000);
     return this
 }
 
