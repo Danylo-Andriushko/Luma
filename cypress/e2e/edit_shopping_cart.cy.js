@@ -1,22 +1,21 @@
 import { Cart } from '../support/elements/cart.js';
 import Pages from '../support/pages/pagesFactory.js';
-import { urls } from "../utils/pages_url.js";
-import { changeProductQuantityTo, productsSubtotal } from "../utils/shopping_cart.js"
+import { changeProductQuantityTo, productsSubtotal } from "../utils/shopping_cart_helpers.js"
 import { ProductUtils } from '../utils/product_helpers.js';
-const productHelpers = new ProductUtils();
+const productActions = new ProductUtils();
 
 const cart = new Cart();
 const mainPage = Pages.main_page;
 const cartPage = Pages.cart_page;
 
-describe('Edit cart', () => {
+describe('Edit cart feature', () => {
   beforeEach('open main page', () => {
     mainPage.open();
   })
 
-  describe('Edit mini cart', () => {
-  it('Should recalculate subtotal in the Mini Cart', () => {
-    productHelpers.addProductToTheCart("S", "Blue", 1)
+  describe('Edit Mini Cart', () => {
+  it('User should be able recalculate subtotal in the Mini Cart', () => {
+    productActions.addProductToTheCart("S", "Blue", 1)
     cart.clickCartIcon();
     productsSubtotal(cart.productPrice()).then((initialPrice) => {
       changeProductQuantityTo(5, cart.miniCartQuantityInput(), 
@@ -30,8 +29,8 @@ describe('Edit cart', () => {
     });
   });
 
-  it('User is able delete product from Mini Cart', () => {
-    productHelpers.addProductToTheCart("S", "Blue", 1)
+  it('User should be able delete product from Mini Cart', () => {
+    productActions.addProductToTheCart("S", "Blue", 1)
     cart.clickCartIcon();
     cart.deleteProducts();
     cart.miniCartEmptyPopup().should('eq', 'You have no items in your shopping cart.')
@@ -39,9 +38,9 @@ describe('Edit cart', () => {
 });
 
 describe('Edit Cart page', () => {
-  it('Should recalculate subtotal in the Cart page', () => {
-    productHelpers.addProductToTheCart("S", "Blue", 1)
-    cy.visit(urls.cartPage)
+  it('User should be able recalculate subtotal in the Cart page', () => {
+    productActions.addProductToTheCart("S", "Blue", 1)
+    cartPage.open();
     productsSubtotal(cartPage.productPrice()).then((initialPrice) => {
     changeProductQuantityTo(5, cartPage.cartQuantityInput(), cartPage.updateShoppingCartButton());
     cartPage.productQuantity().should('eq', 5);
@@ -53,9 +52,9 @@ describe('Edit Cart page', () => {
   });
   });
 
-  it('User is able delete product from Cart page', () => {
-    productHelpers.addProductToTheCart("S", "Blue", 1)
-    cy.visit(urls.cartPage)
+  it('User should be able delete product from Cart page', () => {
+    productActions.addProductToTheCart("S", "Blue", 1)
+    cartPage.open();
     cartPage.deleteProductsFromCartPage();
     cartPage.emptyCartTitle().should('eq', 'You have no items in your shopping cart.')
   });

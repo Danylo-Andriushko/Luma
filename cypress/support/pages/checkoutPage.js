@@ -22,29 +22,34 @@ export class CheckoutPage extends BasePage{
     phoneNumberField(){ return cy.get(`[name="telephone"]`) };
     nextButton(){ return cy.get(`.primary.button.action.continue.primary`) };
 
-    randomEmail = faker.internet.email()
-    randomFirstName = faker.person.firstName()
-    randomLastName = faker.person.lastName()
-    randomCompany = faker.company.name()
-    randomStreetAddress = faker.location.street()
-    randomCity = faker.location.city()
-    randomCountry = 'Ukraine'
-    randomState = 'Lvivska obl.'
-    randomPostalCode = faker.location.zipCode()
-    randomPhone = faker.phone.number()
+    checkoutData = {
+    randomEmail: faker.internet.email(),
+    randomFirstName: faker.person.firstName(),
+    randomLastName: faker.person.lastName(),
+    randomCompany: faker.company.name(),
+    randomStreetAddress: faker.location.street(),
+    randomCity: faker.location.city(),
+    randomCountry: 'Ukraine',
+    randomState: 'Lvivska obl.',
+    randomPostalCode:faker.location.zipCode(),
+    randomPhone: faker.phone.number()
+    };
     
-    inputCheckoutData(){
-        this.emailField().type(this.randomEmail);
-        this.firstNameField().type(this.randomFirstName);
-        this.lastNameField().type(this.randomLastName);
-        this.companyField().type(this.randomCompany);
-        this.streetAddressField().type(this.randomStreetAddress);
-        this.countryField().select(this.randomCountry);
-        this.cityField().type(this.randomCity);
-        this.stateField().type(this.randomState);
-        this.postalCodeField().type(this.randomPostalCode);
-        this.phoneNumberField().type(this.randomPhone);
+    inputCheckoutData(email, firstName, lastName, company, street, country, city, state, zipCode, phone){
+        this.emailField().type(email);
+        this.firstNameField().type(firstName);
+        this.lastNameField().type(lastName);
+        this.companyField().type(company);
+        this.streetAddressField().type(street);
+        this.countryField().select(country);
+        this.cityField().type(city);
+        this.stateField().type(state);
+        this.postalCodeField().type(zipCode);
+        this.phoneNumberField().type(phone);
         this.wait(3);
+    }
+
+    clickNextButton(){
         this.nextButton().click({force: true});
     }
 

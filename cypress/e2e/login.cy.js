@@ -3,6 +3,11 @@ import { PageMessage } from '../support/elements/messages.js';
 import Pages from '../support/pages/pagesFactory.js';
 import messageData from "../fixtures/message_data.json";
 
+const validEmail = Cypress.env('USER_EMAIL');
+const validPassword = Cypress.env('USER_PASSWORD');
+const invalidEmail = Cypress.env('INVALID_EMAIL');
+const invalidPassword = Cypress.env('INVALID_PASSWORD');
+
 const header = new Header();
 const pageMessage = new PageMessage();
 const mainPage = Pages.main_page;
@@ -15,8 +20,8 @@ describe('Login feature', () => {
     mainPage.open();
   })
 
-  it('Check Sign In button available from all pages', () => {
-    header.availableFromAllContentPages('signInButton');
+  it('Sign In button should be available from all pages', () => {
+    header.checkIfAvailableFromAllContentPages('signInButton');
   })
 
   it('Login required fields should have descriptions and marked with "*"', () => {
@@ -25,21 +30,21 @@ describe('Login feature', () => {
     loginPage.checkLoginRequiredAttributesFields();
   })
 
-  it('User is able to login with valid credentials', () => {
+  it('User should be able to login with valid credentials', () => {
     header.signInButton().click({multiple:true})
-    loginPage.signIn(Cypress.env('USER_EMAIL'), Cypress.env('USER_PASSWORD'))
+    loginPage.signIn(validEmail, validPassword)
     homePage.checkPageUrl();
   })
 
   it('Login with invalid password', () => {
     header.signInButton().click({multiple:true});
-    loginPage.signIn(Cypress.env('USER_EMAIL'), Cypress.env('INVALID_PASSWORD'));
+    loginPage.signIn(validEmail, invalidPassword);
     pageMessage.pageMessageText().should('eq', messageData.errorPasswordMessage);
   })
 
   it('Login with invalid email', () => {
     header.signInButton().click({multiple:true});
-    loginPage.signIn(Cypress.env('INVALID_EMAIL'), Cypress.env('USER_PASSWORD'));
+    loginPage.signIn(invalidEmail, validPassword);
     loginPage.emailErrorMessageText().should('eq', messageData.errorEmailMessage);
   })
 

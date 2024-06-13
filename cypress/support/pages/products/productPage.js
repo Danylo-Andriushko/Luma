@@ -17,7 +17,7 @@ customizeProductOnTheCurrentPage(size, color, quantity) {
     return customizeProductOptions.customizeProduct(size, color, quantity);
 }
 
-productIsAdded() { this.productTitle().then((title) => {
+checkIfProductIsAdded() { this.productTitle().then((title) => {
         return pageMessage.pageMessageText().should('include', `You added ${title} to your shopping cart.`);
     })
 }
