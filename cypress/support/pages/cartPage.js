@@ -18,16 +18,18 @@ export class CartPage extends BasePage{
     }
 
     deleteProductsFromCartPage(){
+        this.wait(1);
         this.deleteProductButton().click({force: true});
         return this;
     }
 
     emptyCartTitle(){
+        this.wait(1);
         return this.cartTitle().invoke('text')
     }
 
     openCheckoutPage(){
-        cy.wait(3000)
+        this.wait(3)
         this.proceedToCheckoutButton().click({force: true});
         cy.url().should('include', '/checkout/#shipping')
         return this;

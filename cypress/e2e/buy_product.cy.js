@@ -7,7 +7,18 @@ const paymentPage = Pages.payment_page;
 const checkoutPage = Pages.checkout_page;
 const cartPage = Pages.cart_page;
 const successPage = Pages.success_page;
-
+const { 
+  randomEmail, 
+  randomFirstName, 
+  randomLastName,  
+  randomCompany, 
+  randomStreetAddress, 
+  randomCountry, 
+  randomCity, 
+  randomState, 
+  randomPostalCode, 
+  randomPhone 
+} = checkoutPage.checkoutData;
 
 describe('Buy product feature', () => {
   beforeEach('open main page', () => {
@@ -22,21 +33,21 @@ describe('Buy product feature', () => {
     checkoutPage.checkCheckoutRequiredAttributesFields();
   })
 
-  it('Guest user should be able order the product', () => {
+  it('Guest user should be able to order the product', () => {
     productActions.addProductToTheCart("S", "Blue", 1);
     cartPage.open();
     cartPage.openCheckoutPage();
     checkoutPage.inputCheckoutData(
-      checkoutPage.checkoutData.randomEmail,
-      checkoutPage.checkoutData.randomFirstName,
-      checkoutPage.checkoutData.randomLastName,
-      checkoutPage.checkoutData.randomCompany,
-      checkoutPage.checkoutData.randomStreetAddress,
-      checkoutPage.checkoutData.randomCountry,
-      checkoutPage.checkoutData.randomCity,
-      checkoutPage.checkoutData.randomState,
-      checkoutPage.checkoutData.randomPostalCode,
-      checkoutPage.checkoutData.randomPhone,
+      randomEmail,
+      randomFirstName,
+      randomLastName,
+      randomCompany,
+      randomStreetAddress,
+      randomCountry,
+      randomCity,
+      randomState,
+      randomPostalCode,
+      randomPhone
     );
     checkoutPage.clickNextButton();
     paymentPage.confirmOrder();

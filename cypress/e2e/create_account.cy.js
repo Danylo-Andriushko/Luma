@@ -4,6 +4,12 @@ const header = new Header();
 const mainPage = Pages.main_page;
 const create_account_page = Pages.create_account_page;
 const account = Pages.account_page;
+const { 
+  randomFirstName, 
+  randomLastName, 
+  randomEmail, 
+  randomPassword 
+} = create_account_page.registrationData;
 
 
 describe('Registration feature', () => {
@@ -24,10 +30,10 @@ describe('Registration feature', () => {
   it('New user should be able to register with valid data', () => {
     header.createAnAccountLink().click({ force: true });
     create_account_page.inputRegistrationData(
-      create_account_page.registrationData.randomFirstName,
-      create_account_page.registrationData.randomLastName,
-      create_account_page.registrationData.randomEmail,
-      create_account_page.registrationData.randomPassword,
+      randomFirstName,
+      randomLastName,
+      randomEmail,
+      randomPassword,
     );
     create_account_page.clickCreateAnAccountButton();
     create_account_page.checkIfRegistrationMessageIsSuccessful()

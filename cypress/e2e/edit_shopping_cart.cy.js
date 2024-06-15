@@ -13,7 +13,7 @@ describe('Edit cart feature', () => {
     mainPage.open();
   })
 
-  describe('Edit Mini Cart', () => {
+  describe('Mini Cart', () => {
   it('User should be able recalculate subtotal in the Mini Cart', () => {
     productActions.addProductToTheCart("S", "Blue", 1)
     cart.clickCartIcon();
@@ -29,7 +29,7 @@ describe('Edit cart feature', () => {
     });
   });
 
-  it('User should be able delete product from Mini Cart', () => {
+  it('User should be able to delete product from Mini Cart', () => {
     productActions.addProductToTheCart("S", "Blue", 1)
     cart.clickCartIcon();
     cart.deleteProducts();
@@ -37,8 +37,8 @@ describe('Edit cart feature', () => {
   });
 });
 
-describe('Edit Cart page', () => {
-  it('User should be able recalculate subtotal in the Cart page', () => {
+describe('Cart page', () => {
+  it('User should be able to recalculate subtotal in the Cart page', () => {
     productActions.addProductToTheCart("S", "Blue", 1)
     cartPage.open();
     productsSubtotal(cartPage.productPrice()).then((initialPrice) => {
@@ -52,7 +52,7 @@ describe('Edit Cart page', () => {
   });
   });
 
-  it('User should be able delete product from Cart page', () => {
+  it('User should be able to delete product from Cart page', () => {
     productActions.addProductToTheCart("S", "Blue", 1)
     cartPage.open();
     cartPage.deleteProductsFromCartPage();
