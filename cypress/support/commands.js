@@ -23,4 +23,4 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
-// require('./custom-commands/customizeProduct');
+// require('../utils/custom_commands/custom_functions');

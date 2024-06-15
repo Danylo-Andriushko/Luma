@@ -3,6 +3,8 @@ export class BasePage{
         this.url = '/';
     }
 
+    loadingSpinner(){return cy.get('[title="Loading..."]')}
+
     open(){
         return cy.visit(this.url)
     };

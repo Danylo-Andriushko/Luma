@@ -1,9 +1,9 @@
 import { BasePage } from "./base_page";
 import { faker } from "@faker-js/faker";
-import { checkAttributesFields, checkRequiredAttributesFields } from '../../fixtures/checkAttributes';
-import { Message } from "../elements/messages";
-const { registrationsAttributesValues } = require("../../fixtures/customer_account_data");
-const registrationMessage = new Message();
+import { checkAttributesFields, checkRequiredAttributesFields } from '../../utils/check_attributes';
+import { PageMessage } from "../elements/messages";
+import attributesData from "../../fixtures/attributes_data.json";
+const pageMessage = new PageMessage();
 
 
 export class CreateNewAccountPage extends BasePage{
@@ -20,29 +20,34 @@ export class CreateNewAccountPage extends BasePage{
     confirmPasswordField () { return cy.get(`#password-confirmation`) };
     createAnAccountButton () { return cy.get(`.action.submit.primary[title='Create an Account']`) };
 
-    randomFirstName = faker.person.firstName();
-    randomLastName = faker.person.lastName();
-    randomEmail = faker.internet.email();
-    randomPassword = faker.internet.password();
+    registrationData = {
+    randomFirstName: faker.person.firstName(),
+    randomLastName: faker.person.lastName(),
+    randomEmail: faker.internet.email(),
+    randomPassword: faker.internet.password(),
+    };
 
     checkRegistrationAttributesFields() {
-        checkAttributesFields(registrationsAttributesValues, this.fieldsAttributes.bind(this));
+        checkAttributesFields(attributesData.registrationsAttributesValues, this.fieldsAttributes.bind(this));
     }
 
     checkRegistrationRequiredAttributesFields() {
-        checkRequiredAttributesFields(registrationsAttributesValues, this.fieldsAttributes.bind(this));
+        checkRequiredAttributesFields(attributesData.registrationsAttributesValues, this.fieldsAttributes.bind(this));
     }
 
-    inputRegistrationData(){
-        this.firstNameField().type(this.randomFirstName);
-        this.lastNameField().type(this.randomLastName);
-        this.emailField().type(this.randomEmail);
-        this.passwordField().type(this.randomPassword);
-        this.confirmPasswordField().type(this.randomPassword);
+    inputRegistrationData(firstName, lastName, email, password){
+        this.firstNameField().type(firstName);
+        this.lastNameField().type(lastName);
+        this.emailField().type(email);
+        this.passwordField().type(password);
+        this.confirmPasswordField().type(password);  
+    }
+
+    clickCreateAnAccountButton(){
         this.createAnAccountButton().click({multiple: true})
     }
 
-    registrationMessageIsSuccessful(){
-        return registrationMessage.message().should('eq', 'Thank you for registering with Main Website Store.')
+    checkIfRegistrationMessageIsSuccessful(){
+        return pageMessage.pageMessageText().should('eq', 'Thank you for registering with Main Website Store.')
     }
 }

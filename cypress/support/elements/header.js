@@ -11,7 +11,7 @@ export class Header{
         .contains("Create an Account") 
     };
 
-    availableFromAllContentPages(item) {
+    checkIfAvailableFromAllContentPages(item) {
         const menuButtons = [
             menuItems.whatsNew,
             menuItems.womenButton,
