@@ -1,4 +1,4 @@
-import { ProductUtils } from "../../../utils/product_helpers";
+import { ProductUtils } from "../../../utils/product_manager";
 import { PageMessage } from "../../elements/messages";
 import { BasePage } from "../base_page";
 const pageMessage = new PageMessage();

@@ -25,14 +25,14 @@ describe('Login feature', () => {
   })
 
   it('Login required fields should have descriptions and marked with "*"', () => {
-    header.signInButton().click({multiple:true})
+    header.signInButton().click({multiple:true});
     loginPage.checkLoginAttributesFields();
     loginPage.checkLoginRequiredAttributesFields();
   })
 
   it('User should be able to login with valid credentials', () => {
-    header.signInButton().click({multiple:true})
-    loginPage.signIn(validEmail, validPassword)
+    header.signInButton().click({multiple:true});
+    loginPage.signIn(validEmail, validPassword);
     homePage.checkPageUrl();
   })
 

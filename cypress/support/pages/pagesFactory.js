@@ -3,6 +3,7 @@ import { CartPage } from "./cartPage";
 import { CheckoutPage } from "./checkoutPage";
 import { CreateNewAccountPage } from "./create_account_page";
 import { HomePage } from "./home_page";
+import { LogoutPage } from "./logOut_page";
 import { LoginPage } from "./login_page";
 import { MainPage } from "./main_page";
 import { PaymentPage } from "./paymentPage";
@@ -23,6 +24,7 @@ class Pages{
         this.checkout_page = new CheckoutPage();
         this.payment_page = new PaymentPage();
         this.success_page = new SuccessPage();
+        this.logout_page = new LogoutPage();
     }
 
 }
