@@ -1,6 +1,6 @@
 import { Header } from '../support/elements/header.js';
 import Pages from '../support/pages/pagesFactory.js';
-import { loginToTheApplication, signOut,  checkIfUserIsAbleToSignIn } from '../utils/login_manager.js';
+import { loginToTheApplication, signOut } from '../utils/login_manager.js';
 import { checkIfLocalStorageIsNotContainData } from '../utils/session_handler.js';
 
 const validEmail = Cypress.env('USER_EMAIL');
@@ -9,6 +9,8 @@ const validPassword = Cypress.env('USER_PASSWORD');
 const header = new Header();
 const homePage = Pages.home_page;
 const logOutPage = Pages.logout_page;
+const loginPage = Pages.login_page;
+const myAccountPage = Pages.account_page;
 
 
 describe('Sign-out feature', () => {
@@ -37,6 +39,8 @@ describe('Sign-out feature', () => {
   });
 
   it('User should be able to sign-in again to have access to "My Account" features', () => {
-    checkIfUserIsAbleToSignIn(validEmail, validPassword);
+    header.signInButton().click({force: true});
+    loginPage.signIn(validEmail, validPassword);
+    myAccountPage.checkPageUrl();
   });
 })

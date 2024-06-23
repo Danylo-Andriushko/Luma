@@ -1,7 +1,7 @@
 import { Cart } from '../support/elements/cart.js';
 import Pages from '../support/pages/pagesFactory.js';
 import { changeProductQuantityTo, productsSubtotal } from "../utils/shopping_cart_manager.js"
-import { ProductUtils } from '../utils/product_helpers.js';
+import { ProductUtils } from '../utils/product_manager.js';
 const productActions = new ProductUtils();
 
 const cart = new Cart();
