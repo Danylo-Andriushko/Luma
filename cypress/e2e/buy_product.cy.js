@@ -1,5 +1,5 @@
 import Pages from '../support/pages/pagesFactory.js';
-import { ProductUtils } from '../utils/product_helpers.js';
+import { ProductUtils } from '../utils/product_manager';
 
 const productActions = new ProductUtils();
 const mainPage = Pages.main_page;

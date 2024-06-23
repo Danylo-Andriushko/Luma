@@ -1,8 +1,10 @@
+import { BasePage } from "../pages/base_page";
 import { MainContentMenu } from "./mainContentMenu";
 const menuItems = new MainContentMenu();
 
-export class Header{
+export class Header extends BasePage{
     constructor(){
+        super();
     }
 
     signInButton(){ return cy.xpath('//a[normalize-space(text())="Sign In"]').first() }
@@ -10,6 +12,11 @@ export class Header{
         return cy.get(`a[href='https://magento.softwaretestingboard.com/customer/account/create/']`)
         .contains("Create an Account") 
     };
+    signOutLink() { 
+        return cy.get(`a[href="https://magento.softwaretestingboard.com/customer/account/logout/"]`)
+        .contains("Sign Out") 
+    };
+    userMenu(){ return cy.get(`.page-wrapper > header > div.panel button`) }
 
     checkIfAvailableFromAllContentPages(item) {
         const menuButtons = [
