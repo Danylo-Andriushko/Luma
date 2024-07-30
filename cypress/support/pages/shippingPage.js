@@ -1,12 +1,13 @@
 import { BasePage } from "./base_page";
-import { faker } from "@faker-js/faker";
+// import { faker } from "@faker-js/faker";
 import { checkAttributesFields, checkRequiredAttributesFields } from '../../utils/check_attributes';
 import attributesData from "../../fixtures/attributes_data.json";
+import { shippingRandomData } from "../../fixtures/shipping_data";
 
-export class CheckoutPage extends BasePage{
+export class ShippingPage extends BasePage{
     constructor(){
         super();
-        this.url = '/checkout/cart/';
+        this.url = '/checkout/#shipping';
     }
 
     fieldsAttributes (field) { return cy.get(`[name="${field}"] .label`) };
@@ -22,18 +23,6 @@ export class CheckoutPage extends BasePage{
     phoneNumberField(){ return cy.get(`[name="telephone"]`) };
     nextButton(){ return cy.get(`.primary.button.action.continue.primary`) };
 
-    checkoutData = {
-    randomEmail: faker.internet.email(),
-    randomFirstName: faker.person.firstName(),
-    randomLastName: faker.person.lastName(),
-    randomCompany: faker.company.name(),
-    randomStreetAddress: faker.location.street(),
-    randomCity: faker.location.city(),
-    randomCountry: 'Ukraine',
-    randomState: 'Lvivska obl.',
-    randomPostalCode:faker.location.zipCode(),
-    randomPhone: faker.phone.number()
-    };
     
     inputCheckoutData(email, firstName, lastName, company, street, country, city, state, zipCode, phone){
         this.emailField().type(email);
@@ -47,6 +36,21 @@ export class CheckoutPage extends BasePage{
         this.postalCodeField().type(zipCode);
         this.phoneNumberField().type(phone);
         this.wait(3);
+    }
+
+    checkoutOrder(){
+        this.inputCheckoutData(
+            shippingRandomData.randomEmail, 
+            shippingRandomData.randomFirstName, 
+            shippingRandomData.randomLastName, 
+            shippingRandomData.randomCompany, 
+            shippingRandomData.randomStreetAddress, 
+            shippingRandomData.randomCountry, 
+            shippingRandomData.randomCity, 
+            shippingRandomData.randomState, 
+            shippingRandomData.randomPostalCode, 
+            shippingRandomData.randomPhone)
+        
     }
 
     clickNextButton(){
