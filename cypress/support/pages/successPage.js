@@ -9,9 +9,8 @@ export class SuccessPage extends BasePage{
     pageTitle(){ return cy.get(`span[data-ui-id="page-title-wrapper"]`) };
     continueShoppingButton(){ return cy.get(`a.action.primary.continue`) };
     
-    checkIfOrderIsSuccessfull(){
-        this.pageTitle().invoke('text').should('eql', 'Thank you for your purchase!')
-        this.continueShoppingButton().should('be.visible');
+    confirmationMessage(){
+        return this.pageTitle().invoke('text')
     }
 
 }

@@ -32,16 +32,29 @@ customizeProduct(size, color, quantity) {
     this.wait(1),
     this.sizeMenu(size).click({ force: true }),
     this.productColor(color).click({ force: true }),
-    this.productQuantity().clear().type(quantity),
-    this.addButton().click({ multiple: true })
+    this.productQuantity().clear().type(quantity);
 }
 
 
-addProductToTheCart(size, color, quantity){
+selectCustomizedProduct(size, color, productIndex, quantity){
     mainPage.selectProductsGroup();
-    productsPage.selectProduct(quantity);
+    productsPage.selectProduct(productIndex);
     this.customizeProduct(size, color, quantity);
-    return this
+    return this;
+}
+
+addProductToTheCart(size, color, productIndex, quantity){
+    this.selectCustomizedProduct(size, color, productIndex, quantity);
+    this.addButton().click({ multiple: true });
+    return this;
+}
+
+addMoreThanOneProductToTheCart(size, color, productIndex, productQuantity, iterationQuantity) {
+    for (let i = -1; i < iterationQuantity; i++) {
+        this.selectCustomizedProduct(size, color, productIndex + i, productQuantity);
+        this.addButton().click({ multiple: true });
+    }
+    return this;
 }
 
 openCartPage(){

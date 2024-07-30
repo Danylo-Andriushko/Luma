@@ -13,12 +13,31 @@ productTitle(){
     return cy.get(`span[data-ui-id="page-title-wrapper"]`).invoke('text')
 }
 
+sizeOption(){
+    return cy.get(`.swatch-option.text.selected`)
+}
+
+colorOption(){
+    return cy.get(`.swatch-option.color.selected`)
+}
+
 customizeProductOnTheCurrentPage(size, color, quantity) {
     return customizeProductOptions.customizeProduct(size, color, quantity);
 }
 
-checkIfProductIsAdded() { this.productTitle().then((title) => {
+addButton() {
+    return cy.get(`button[id="product-addtocart-button"]`);
+}
+
+checkIfProductIsAdded() { 
+        this.productTitle().then((title) => {
         return pageMessage.pageMessageText().should('include', `You added ${title} to your shopping cart.`);
     })
 }
+
+checkIfOptionsIs(value) {
+    this.sizeOption().should('have.class', value);
+    this.colorOption().should('have.class', value);
+}
+
 }

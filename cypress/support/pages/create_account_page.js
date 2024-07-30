@@ -1,5 +1,4 @@
 import { BasePage } from "./base_page";
-import { faker } from "@faker-js/faker";
 import { checkAttributesFields, checkRequiredAttributesFields } from '../../utils/check_attributes';
 import { PageMessage } from "../elements/messages";
 import attributesData from "../../fixtures/attributes_data.json";
@@ -20,12 +19,6 @@ export class CreateNewAccountPage extends BasePage{
     confirmPasswordField () { return cy.get(`#password-confirmation`) };
     createAnAccountButton () { return cy.get(`.action.submit.primary[title='Create an Account']`) };
 
-    registrationData = {
-    randomFirstName: faker.person.firstName(),
-    randomLastName: faker.person.lastName(),
-    randomEmail: faker.internet.email(),
-    randomPassword: faker.internet.password(),
-    };
 
     checkRegistrationAttributesFields() {
         checkAttributesFields(attributesData.registrationsAttributesValues, this.fieldsAttributes.bind(this));

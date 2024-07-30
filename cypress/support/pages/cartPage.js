@@ -6,12 +6,23 @@ export class CartPage extends BasePage{
         this.url = '/checkout/cart/';
     }
 
+
+    cartPageItem(){ return cy.get(`.cart.item`) };
+    productImage(){ return cy.get(`.product-image-photo[data-bind]`) };
+    productName(){ return cy.get(`.cart.item .product-item-details .product-item-name`) };
+    productPrice(){ return cy.get(`.col.price .cart-price .price`) };
     cartQuantityInput(){ return cy.get(`input.input-text.qty`) };
+    productSubtotal(){ return cy.get(`[data-th="Subtotal"] .cart-price`) };
+    editButton(){ return cy.get(`.action.action-edit`) };
+    deleteButton(){ return cy.get(`.action.action-delete`) }
     updateShoppingCartButton(){ return cy.get(`button.action.update`) };
-    productPrice(){ return cy.get(`span.price-wrapper[data-bind="html: cart().subtotal_excl_tax"]`)};
     deleteProductButton(){ return cy.get(`.action.action-delete`)};
     cartTitle(){ return cy.get(`.cart-empty p`).first()};
-    proceedToCheckoutButton(){ return cy.get(`button[data-role="proceed-to-checkout"]`) }
+    proceedToCheckoutButton(){ return cy.get(`button[data-role="proceed-to-checkout"]`) };
+
+    productNameText(){
+        return this.productName().invoke('text')
+    }
 
     productQuantity() {
         return this.cartQuantityInput().invoke('attr', 'value').then((text) => Number(text));
@@ -19,7 +30,13 @@ export class CartPage extends BasePage{
 
     deleteProductsFromCartPage(){
         this.wait(1);
-        this.deleteProductButton().click({force: true});
+        this.deleteButton().click({force: true});
+        return this;
+    }
+
+    confirmCheckoutFromCartPage(){
+        this.wait(1);
+        this.proceedToCheckoutButton().click({force: true});
         return this;
     }
 
@@ -28,10 +45,20 @@ export class CartPage extends BasePage{
         return this.cartTitle().invoke('text')
     }
 
-    openCheckoutPage(){
+    openShippingPage(){
         this.wait(3)
         this.proceedToCheckoutButton().click({force: true});
-        cy.url().should('include', '/checkout/#shipping')
-        return this;
+    }
+
+    checkCartPageProductDetailsIsExist(){
+        return [
+        this.productImage().should('have.prop', 'tagName', 'IMG'),
+        this.productName(),
+        this.productPrice(),
+        this.cartQuantityInput(),
+        this.productSubtotal(),
+        this.editButton(), 
+        this.editButton()
+        ]
     }
 }

@@ -1,15 +1,18 @@
 import { Header } from '../support/elements/header.js';
+import { registrationData } from '../fixtures/registration_data.js';
 import Pages from '../support/pages/pagesFactory.js';
+
 const header = new Header();
 const mainPage = Pages.main_page;
 const create_account_page = Pages.create_account_page;
 const account = Pages.account_page;
+
 const { 
   randomFirstName, 
   randomLastName, 
   randomEmail, 
   randomPassword 
-} = create_account_page.registrationData;
+} = registrationData;
 
 
 describe('Registration feature', () => {
